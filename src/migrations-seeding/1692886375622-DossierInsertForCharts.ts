@@ -530,7 +530,6 @@ export class DossierInsertForCharts1692886375622 implements MigrationInterface {
                 for (const doc of docList) {
                     await documentRepo.save(doc);
                 }
-                console.log(generated.length);
             }
             queryRunner.connection.logger = prevLogger;
             await queryRunner.commitTransaction();

@@ -138,7 +138,6 @@ export class CompaniesInsertForCharts1692886375621
             while (generated.length > 1) {
                 const company = generated.splice(0, 1)[0];
                 await companiesRepo.save(company);
-                console.log(generated.length);
             }
             queryRunner.connection.logger = prevLogger;
             await queryRunner.commitTransaction();

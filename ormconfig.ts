@@ -14,4 +14,3 @@ export const connectionSource = new DataSource({
     migrations: [process.env.TYPEORM_MIGRATIONS!],
     migrationsTransactionMode: 'none'
 })
-console.log('ENV', process.env.TYPEORM_MIGRATIONS)

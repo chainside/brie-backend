@@ -150,7 +150,6 @@ export class AuthService {
             secure: true,
             path: '/',
         });
-        console.log('generate token', user)
 
         return user.buildData();
     }
@@ -195,21 +194,17 @@ export class AuthService {
     }
 
     async login(input: LoginUserInput, res: Response) {
-        console.log('called')
         const user = await this.userService.findOneByEmail(input.email);
-        console.log('got user', user)
         if (!user) {
             throw new UnauthorizedException();
         }
 
         const isMatch = await bcrypt.compare(input.password, user.password);
-        console.log('got match', isMatch)
 
         if (isMatch) {
             const idRefreshToken = (
                 await this.tokenService.findOneByUser(user.id)
             )?.id;
-            console.log('got refresh token', idRefreshToken)
 
             return await this.generateTokens(
                 user,

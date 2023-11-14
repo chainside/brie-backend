@@ -13,7 +13,6 @@ export class CustomsScheduler {
     @Interval(configValidation().SCHEDULER_INTERVAL_MS_CUSTOM_APPROVE_CLEARANCE)
     async approveCustomsClearance() {
         try {
-            console.log('started approve clearance', configValidation().SCHEDULER_INTERVAL_MS_CUSTOM_APPROVE_CLEARANCE, process.env.SCHEDULER_INTERVAL_MS_CUSTOM_APPROVE_CLEARANCE)
             await this.dossierService.approveCustomsClearance();
         } catch (error) {
             console.error(error)
@@ -24,7 +23,6 @@ export class CustomsScheduler {
     @Interval(configValidation().SCHEDULER_INTERVAL_MS_CUSTOM_APPROVE_DDT)
     async approveDDT() {
         try {
-            console.log('started approve ddt')
             await this.dossierService.approveDDT();
         } catch (error) {
             console.error(error)
@@ -35,7 +33,6 @@ export class CustomsScheduler {
     @Interval(configValidation().SCHEDULER_INTERVAL_MS_CUSTOM_APPROVE_CLOSING)
     async approveClosing() {
         try {
-            console.log('started approve closing')
 
             await this.dossierService.approveClosing();
         } catch (error) {
@@ -46,7 +43,6 @@ export class CustomsScheduler {
     @Interval(60000)
     async notarizeDocument() {
         try {
-            console.log('started notarizing')
 
             await this.documentService.notarizeDocument()
         } catch (error) {

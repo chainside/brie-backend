@@ -139,13 +139,11 @@ export class DocumentService {
                             "SUPPLIER1": ["SUPPLIER", "ELECTRONICS"],
                             "SUPPLIER2": ["SUPPLIER", "MECHANICS"]}
                     }))
-                    console.log('got process id', process.data.process_id)
                     doc.processId = process.data.process_id;
                     const handshake = await firstValueFrom(this.httpService.post(`http://${configValidation().CAKE_URI}/dataOwner/handshake`,{
                         process_id: doc.processId
                     }));
 
-                    console.log(handshake.data)
 
                     const request = {
                         "id": doc.processId,
@@ -161,7 +159,6 @@ export class DocumentService {
 
                     const {data} = await firstValueFrom(this.httpService.post<{ message_id: string, tx_id: string, ipfs_link: string}>(`http://${configValidation().CAKE_URI}/dataOwner/cipher`, request))
 
-                    console.log(data)
 
                     doc.messageId = data.message_id;
                     doc.ipfsLink = data.ipfs_link;
@@ -169,7 +166,6 @@ export class DocumentService {
                     doc.state = ValidDocStates.NOTARIZED;
                     doc.file = null;
                 } catch (e) {
-                    console.log("error while notarizing")
                     console.error(e)
                     doc.state = ValidDocStates.FAILED
                 }
