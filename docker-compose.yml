@@ -1,0 +1,39 @@
+# THIS DOCKERFILE IS INTENDED FOR DEVELOPMENT ENVIRONMENTS
+# DO NOT USE THIS FOR PRODUCTION USAGES.
+version: '3'
+
+services:
+    brie-db:
+        image: postgres
+        container_name: postgres
+        ports:
+            - '5431:5432'
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=briedb
+    brie-db-test:
+        image: postgres
+        container_name: briedbtest
+        ports:
+            - '5432:5432'
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=briedbtest
+    brie-backend:
+        build:
+            context: .
+            dockerfile: Dockerfile.BE
+        env_file:
+            - env.staging
+        container_name: brie-backend
+        ports:
+            - '8080:4000'
+    brie-frontend:
+        build:
+            context: ../brie-frontend/
+            dockerfile: Dockerfile.FE
+        container_name: brie-frontend
+        ports:
+            - '80:80'

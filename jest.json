@@ -1,0 +1,21 @@
+{
+    "moduleFileExtensions": ["ts", "tsx", "js", "json"],
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/src/.*\\.(test|spec).(ts|tsx|js)$",
+    "collectCoverageFrom": [
+        "src/**/*.{js,jsx,tsx,ts}",
+        "!**/node_modules/**",
+        "!**/src/migrations/**",
+        "!**/src/main.ts",
+        "!**/src/migrations-seeding/**",
+        "!**/src/**/spec/**",
+        "!**/src/modules/common/flow/**",
+        "!**/src/modules/common/model/**",
+        "!**/src/modules/common/security/**",
+        "!**/src/modules/*.module.ts",
+        "!**/src/modules/**/*.module.ts"
+    ],
+    "testURL": "http://localhost"
+}

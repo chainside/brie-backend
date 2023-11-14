@@ -1,0 +1,18 @@
+FROM node:16-alpine as brieSeeder
+
+ENV NODE_ENV seeder
+
+USER node
+WORKDIR /home/node
+
+COPY --chown=node:node . .
+COPY package*.json ./
+COPY package.json ./
+RUN npm ci
+
+COPY env.staging .env
+RUN npm run migration:clean
+RUN npm run migration:generate --name=CreateTables
+RUN npm run migration:run
+RUN cp ./src/migrations-seeding/* ./src/migrations/
+RUN npm run migration:run
